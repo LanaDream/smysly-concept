@@ -130,10 +130,11 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 300; }
 }
 .hero-bg {
   position: absolute; inset: -40px; z-index: -3;
-  background: #3A2614 url("img/forest-bg.jpg") center / cover no-repeat;
+  background: #6E5139 url("img/crowns-bg.jpg") center / cover no-repeat;
   will-change: transform; transform: scale(1.04);
 }
-.hero-bg::after { content: ""; position: absolute; inset: 0; background: rgba(30,18,9,.38); }
+.hero-bg::after { content: ""; position: absolute; inset: 0; background: rgba(30,18,9,.38); opacity: 0; transition: opacity 1.2s ease; }
+html.intro .hero-bg::after { opacity: 1; }
 .hero-full { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s ease; }
 .hero-full.on { opacity: 1; }
 #wall { position: absolute; left: 0; top: 0; z-index: -1; pointer-events: none; display: block; }
@@ -190,8 +191,8 @@ html.is-open .site-header, html.is-open .hero-top, html.is-open .win-label, html
 html.is-open #wall .reveals { opacity: 0; transition-duration: .3s; }
 
 /* ---------- manifest ---------- */
-.manifest { position: relative; height: 210vh; background: var(--plaster-hi) var(--plaster-tex); color: var(--walnut); }
-.manifest-sticky { position: sticky; top: 0; height: 100vh; display: grid; align-items: center; padding: 0 var(--gutter); }
+.manifest { position: relative; background: var(--plaster-hi) var(--plaster-tex); color: var(--walnut); padding: clamp(96px, 13vw, 190px) var(--gutter); }
+.manifest-sticky { display: block; }
 .manifest-text { margin: 0 auto; max-width: 21em; font-family: var(--font-display); font-weight: 300; font-size: clamp(1.9rem, 1rem + 3.4vw, 4rem); line-height: 1.16; letter-spacing: -.012em; text-wrap: balance; }
 .manifest-text .w { opacity: .14; transition: opacity .45s ease, color .45s ease; }
 .manifest-text .w.on { opacity: 1; }
@@ -347,8 +348,6 @@ html.is-open #wall .reveals { opacity: 0; transition-duration: .3s; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-  .manifest { height: auto; }
-  .manifest-sticky { position: static; height: auto; padding-block: var(--section); }
   .manifest-text .w { opacity: 1; }
 }
 </style>
@@ -407,7 +406,7 @@ html.is-open #wall .reveals { opacity: 0; transition-duration: .3s; }
 
   <section class="manifest" aria-label="О центре">
     <div class="manifest-sticky">
-      <p class="manifest-text" data-keys="другом,месте.,смыслы.">Даже если вы здесь ненадолго, можно очутиться совсем в другом месте. Тёплом и безопасном, где есть время прислушаться к себе и спокойно искать свои смыслы.</p>
+      <p class="manifest-text">Мы создали это место специально, чтобы каждый мог почувствовать связь с собой. Здесь прислушиваются к телу, занимаются в группах, говорят с психологом и спокойно ищут свои смыслы.</p>
     </div>
   </section>
 
@@ -435,7 +434,7 @@ html.is-open #wall .reveals { opacity: 0; transition-duration: .3s; }
     <div class="space-grid">
       <div class="space-intro">
         <h2 id="space-title">Пространство глубоких встреч</h2>
-        <p>Мы создали центр для долгожданной встречи с собой. Потерянные смыслы здесь ищут через контакт с собой: в телесных практиках и в наблюдении за состоянием. Сюда, в безопасное и принимающее пространство, приходят перевести дух и оставить лишнее за дверью, почти как домой.</p>
+        <p>В «Смыслы» приходят на долгожданную встречу с собой. Потерянные смыслы здесь ищут через контакт: в беседе, в телесных практиках и в наблюдении за своим состоянием. Ждём гостей и друзей в безопасном и принимающем пространстве, где лишнее можно оставить за дверью, как дома.</p>
       </div>
       <figure class="shot shot-main">
         <div class="frame"><img src="img/reception.jpg" width="1280" height="1024" alt="Ресепшен: деревянная стойка на светлом камне, на стене надпись «Смыслы, пространство глубоких встреч»" loading="lazy"></div>
@@ -647,10 +646,13 @@ html.is-open #wall .reveals { opacity: 0; transition-duration: .3s; }
       <pattern id="wTex" patternUnits="userSpaceOnUse" width="${TEX}" height="${TEX}"><image href="${texDark}" width="${TEX}" height="${TEX}"/></pattern>
       <linearGradient id="wCove" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="${f1(H * .5)}"><stop offset="0" stop-color="#F2B66E" stop-opacity=".28"/><stop offset=".25" stop-color="#E6A35C" stop-opacity=".1"/><stop offset="1" stop-color="#FBD9A0" stop-opacity="0"/></linearGradient>
       <radialGradient id="wScallop" cx=".5" cy="0" r="1" fx=".5" fy="0"><stop offset="0" stop-color="#FFC985" stop-opacity=".3"/><stop offset=".55" stop-color="#E9A660" stop-opacity=".09"/><stop offset="1" stop-color="#F8D396" stop-opacity="0"/></radialGradient>
+      <linearGradient id="wText" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="${W}" y2="${f1(H * .6)}"><stop offset="0" stop-color="#2A190D" stop-opacity=".32"/><stop offset=".6" stop-color="#2A190D" stop-opacity=".08"/><stop offset="1" stop-color="#2A190D" stop-opacity="0"/></linearGradient>
       <filter id="wBlur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="2.4"/></filter>
       <mask id="wMask" maskUnits="userSpaceOnUse" x="-10" y="-10" width="${W + 20}" height="${H + 20}"><rect x="-10" y="-10" width="${W + 20}" height="${H + 20}" fill="#fff"/>${wins.map(() => '<path class="hole" fill="#000"/>').join('')}</mask></defs>
       <g mask="url(#wMask)">
-        <rect width="${W}" height="${H}" fill="url(#wTex)"/>
+        <rect width="${W}" height="${H}" fill="#6B4E36" opacity=".6"/>
+        <rect width="${W}" height="${H}" fill="url(#wTex)" opacity=".22"/>
+        <rect width="${W}" height="${H}" fill="url(#wText)"/>
         <rect width="${W}" height="${H}" fill="url(#wCove)"/>
         ${scallops}
         <g class="reveals">${reveals}</g>
@@ -722,13 +724,17 @@ html.is-open #wall .reveals { opacity: 0; transition-duration: .3s; }
   const keys = (mText.dataset.keys || '').split(',');
   mText.innerHTML = mText.textContent.trim().split(/\s+/).map(w => `<span class="w${keys.includes(w) ? ' key' : ''}">${w}</span>`).join(' ');
   const words = $$('.w', mText);
-  function updateManifest() {
-    if (reduce) return;
-    const r = manifest.getBoundingClientRect(), span = r.height - innerHeight;
-    const p = clamp((-r.top + innerHeight * .15) / Math.max(span * .85, 1));
-    const n = Math.round(p * words.length);
-    words.forEach((w, i) => w.classList.toggle('on', i < n));
+  // the line runs by itself as soon as the block is on screen: no scrolling needed
+  let mPlayed = false;
+  function playManifest() {
+    if (mPlayed) return; mPlayed = true;
+    if (reduce) { words.forEach(w => w.classList.add('on')); return; }
+    words.forEach((w, i) => setTimeout(() => w.classList.add('on'), 120 + i * 75));
   }
+  const updateManifest = () => {};
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries, obs) => { if (entries.some(e => e.isIntersecting)) { playManifest(); obs.disconnect(); } }, { threshold: .45 }).observe(mText);
+  } else playManifest();
 
   /* ---------- path of practices: a thin line with beads that winds into the shell ---------- */
   const stage = $('.path-stage'), pSvg = $('.path-svg'), nodes = $$('.node'), coreLabel = $('.core-label');
